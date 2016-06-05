@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .models import Profile
@@ -23,4 +24,4 @@ def make_login(request):
     user = request.user
     profile = Profile.objects.get(id=user.id)
     context = {'message':message, 'user':profile}
-    return render(request, 'au_auth/profile.jinja2',context)
+    return redirect(reverse('au_about:index'))

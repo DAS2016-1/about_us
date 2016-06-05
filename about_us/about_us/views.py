@@ -8,6 +8,5 @@ def index(request):
         print("asdfasdfasdf")
         return redirect(reverse('au_auth:make_login'))
     else:
-        logout(request)
-        return render(request, 'about_us/teste.html')
+        return redirect(reverse('au_about:index'))
 

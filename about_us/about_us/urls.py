@@ -20,5 +20,6 @@ from about_us import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('au_auth.urls', namespace='au_auth')),
+    url(r'^feed/', include('au_about.urls', namespace='au_about')),
     url(r'^', views.index, name='index'),
 ]
