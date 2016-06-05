@@ -20,6 +20,7 @@ def make_login(request):
     else:
         message = "Senha ou Usuário incorreto"
 
-    profile = Profile.objects.get_or_create(user=user,int_number=2)
+    user = request.user
+    profile = Profile.objects.get(id=user.id)
     context = {'message':message, 'user':profile}
     return render(request, 'au_auth/profile.jinja2',context)
