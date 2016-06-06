@@ -35,5 +35,18 @@ def make_logout(request):
 
 def show_profiles(request):
     profiles = Profile.objects.all()
-    context = {'profiles':profiles}
-    return render(request, 'au_auth/profiles.jinja2')
+    context = {
+        'profiles':profiles,
+    }
+    print(profiles)
+    return render(request, 'au_auth/profiles.jinja2', context)
+
+def show_profile(request, profile_pk):
+    profile = Profile.objects.get(id=profile_pk)
+    abouts = profile.about_set.all()
+    context = {
+        'profile':profile,
+        'abouts':abouts,
+    }
+
+    return render(request, 'au_auth/profile.jinja2', context)

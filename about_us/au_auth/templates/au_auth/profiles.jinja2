@@ -1,5 +1,7 @@
 {% extends "about_us/base.jinja2" %}
 
 {% block content %}
-    Profiles
+    {%for profile in profiles %}
+        <a href="{%url "au_auth:show_profile" profile.id%}">{{profile.user}}</a><br>
+    {%endfor%}
 {%endblock%}
