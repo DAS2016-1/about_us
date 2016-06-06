@@ -1,3 +1,5 @@
+{% extends "about_us/base.jinja2" %}
+{%block content %}
 This is feed
 <br>
 <br>
@@ -5,3 +7,5 @@ This is feed
 {%for feed in feeds %}
     {{feed.comment}} <a href="#" >posi</a>  <a href="#" >nega</a><br>
 {%endfor%}
+{%endblock%}
+
