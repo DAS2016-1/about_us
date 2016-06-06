@@ -1,4 +1,9 @@
 {%extends "about_us/base.jinja2"%}
+
+{%block title%}
+    {{profile.user}}
+{%endblock%}
+
 {%block content%}
     <h2>Abouts - {{profile.user}}</h2>
     {%for about in abouts%}

@@ -6,9 +6,17 @@
             {% endblock title %}
         </title>
     </head>
-<h1> About Us </h1>
-<a href="">{{request.user}}</a>
-<a href="{% url 'au_auth:make_logout' %}">Logout</a>
-<a href="{% url 'au_auth:show_profiles' %}">Usuários</a>
-{% block content %}{% endblock content %}
+
+    <body>
+        <header>
+            <h1> About Us </h1>
+            <a href="/feed/">Feed</a>
+            <a href="{%url "au_auth:show_profile" request.user.id%}">Meu Perfil</a>
+            <a href="{% url 'au_auth:show_profiles' %}">Usuários</a>
+            <a href="{% url 'au_auth:make_logout' %}">Logout</a>
+        </header>
+        <br>
+        <br>
+        {% block content %}{% endblock content %}
+    </body>
 </html>
