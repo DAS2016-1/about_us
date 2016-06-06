@@ -20,5 +20,6 @@ from . import views
 app_name = 'au_auth'
 urlpatterns = [
     url(r'^login/', views.make_login, name='make_login'),
+    url(r'^logout/', views.make_logout, name='make_logout'),
     url(r'^', views.index, name='index'),
 ]

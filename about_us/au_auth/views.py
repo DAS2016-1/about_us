@@ -25,3 +25,10 @@ def make_login(request):
     profile = Profile.objects.get(id=user.id)
     context = {'message':message, 'user':profile}
     return redirect(reverse('au_about:index'))
+
+def make_logout(request):
+    logout(request)
+    context = {
+        'user':request.user
+    }
+    return render(request, "au_auth/login.jinja2")
