@@ -1,0 +1,15 @@
+/* body { */
+/*     display: flex; */
+/*     min-height: 10px; */
+/*     flex-direction: column; */
+/* } */
+/*  */
+/* main { */
+/*     flex: 1 0 auto; */
+/* } */
+#initial-logo{
+    padding-left: 50px;
+}
+#nav-bar-custom{
+    padding-right: 3%;
+}
