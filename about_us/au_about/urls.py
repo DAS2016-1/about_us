@@ -19,5 +19,7 @@ from . import views
 
 app_name = 'au_about'
 urlpatterns = [
+    url(r'^positive/(?P<item_id>[0-9]+)/$', views.positive, name='positive'),
+    url(r'^negative/(?P<item_id>[0-9]+)/$', views.negative, name='negative'),
     url(r'^', views.index, name='index'),
 ]

@@ -7,6 +7,6 @@
 {%block content%}
     <h2>Abouts - {{profile.user}}</h2>
     {%for about in abouts%}
-        {{about.comment}} <a href="#" >posi</a>({{about.positive_votes}})  <a href="#" >nega</a>({{about.negative_votes}})<br>
+        {{about.comment}} <a href="{% url "au_about:positive" about.id %}" >posi</a>({{about.positive_votes}})  <a href="{% url "au_about:negative" about.id %}" >nega</a>({{about.negative_votes}})<br>
     {%endfor%}
 {%endblock%}
