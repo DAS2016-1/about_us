@@ -1,1 +1,12 @@
 Este é o login {{user}}
+
+<form action="{% url "au_auth:make_login" %}" method="POST">
+    {% csrf_token %}
+    <label for="user">User: </label>
+    <input id="user" type="text" name="user" value="Username">
+
+    <label for="pass">Password: </label>
+    <input id="pass" type="password" name="pass" value="Password">
+
+    <input type="submit" value="OK">
+</form>

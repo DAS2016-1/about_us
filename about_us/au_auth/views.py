@@ -10,21 +10,21 @@ def index(request):
 
 
 def make_login(request):
-    print("AAAAAAAAAAAAAAAAAAAAA")
-    user = authenticate(username="aluno", password="aluno")
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-            message = "Login Realizado com Sucesso"
+    if request.POST:
+        form = request.POST
+        user_name = form.get('user')
+        password = form.get('pass')
+        user = authenticate(username=user_name, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                message = "Login Realizado com Sucesso"
+            else:
+                message = "Usuário não está ativo"
         else:
-            message = "Usuário não está ativo"
-    else:
-        message = "Senha ou Usuário incorreto"
+            message = "Senha ou Usuário incorreto"
 
-    user = request.user
-    profile = Profile.objects.get(id=user.id)
-    context = {'message':message, 'user':profile}
-    return redirect(reverse('au_about:index'))
+        return redirect(reverse('au_about:index'))
 
 def make_logout(request):
     logout(request)
