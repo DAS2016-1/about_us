@@ -11,6 +11,7 @@ def index(request):
 
 
 def make_login(request):
+    message = ""
     if request.POST:
         form = request.POST
         user_name = form.get('user').strip()
