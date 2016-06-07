@@ -9,4 +9,10 @@
     {%for about in abouts%}
         {{about.comment}} <a href="{% url "au_about:positive" about.id %}" >posi</a>({{about.positive_votes}})  <a href="{% url "au_about:negative" about.id %}" >nega</a>({{about.negative_votes}})<br>
     {%endfor%}
+
+    <form action="{% url "au_about:new"%}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="usrname" value="Escreva um About">
+        <input type="submit">
+    </form>
 {%endblock%}

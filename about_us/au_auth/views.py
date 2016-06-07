@@ -41,7 +41,6 @@ def show_profiles(request):
     context = {
         'profiles':profiles,
     }
-    print(profiles)
     return render(request, 'au_auth/profiles.jinja2', context)
 
 def show_profile(request, profile_pk):

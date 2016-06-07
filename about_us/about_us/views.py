@@ -5,7 +5,6 @@ from django.contrib.auth import logout
 
 def index(request):
     if  isinstance(request.user, AnonymousUser):
-        print("asdfasdfasdf")
         return redirect(reverse('au_auth:make_login'))
     else:
         return redirect(reverse('au_about:index'))

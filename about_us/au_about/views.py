@@ -23,3 +23,12 @@ def negative(request, item_id):
     about.save()
 
     return redirect(reverse("au_about:index"))
+
+def new(request):
+    new_about = About.objects.create(
+        comment=comment,
+        positive_votes=0,
+        negative_votes=0,
+        profile=profile,
+    )
+    return redirect(reverse("au_about:index"))
