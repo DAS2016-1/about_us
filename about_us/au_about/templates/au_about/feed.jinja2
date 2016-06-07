@@ -10,7 +10,7 @@ This is feed
 <br>
 
 {%for feed in feeds %}
-    {{feed.comment}} <a href="{% url "au_about:positive" feed.id %}" >posi</a>({{feed.positive_votes}})  <a href="{% url "au_about:negative" feed.id %}" >nega</a>({{feed.negative_votes}})<br>
+    {{feed.profile.user.username}}: {{feed.comment}} <a href="{% url "au_about:positive" feed.id %}" >posi</a>({{feed.positive_votes}})  <a href="{% url "au_about:negative" feed.id %}" >nega</a>({{feed.negative_votes}})<br>
 {%endfor%}
 {%endblock%}
 

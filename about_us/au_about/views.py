@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from .models import About
+from au_auth.models import Profile
 
 def index(request):
     feeds = About.objects.all()
@@ -25,10 +26,17 @@ def negative(request, item_id):
     return redirect(reverse("au_about:index"))
 
 def new(request):
-    new_about = About.objects.create(
-        comment=comment,
-        positive_votes=0,
-        negative_votes=0,
-        profile=profile,
-    )
+    form = request.POST
+    user_id = request.user.id
+    profile = Profile.objects.get(id=user_id)
+    if form:
+        comment = form.get('comment')
+        print("Commend: ",comment)
+        new_about = About.objects.create(
+            comment=comment,
+            positive_votes=0,
+            negative_votes=0,
+            profile=profile,
+        )
     return redirect(reverse("au_about:index"))
+
