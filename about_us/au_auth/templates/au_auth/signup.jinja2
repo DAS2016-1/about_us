@@ -1,15 +1,15 @@
-<a href="{% url "au_auth:singup"%}">Sing Up</a>
-<br>
-<br>
-<br>
-<form action="{% url "au_auth:make_login" %}" method="POST">
+
+
+<form action="{% url "au_auth:singup" %}" method="POST">
     {% csrf_token %}
     <label for="user">User: </label>
     <input id="user" type="text" name="user" value="Username">
-
+    <br>
     <label for="pass">Password: </label>
     <input id="pass" type="password" name="pass" value="Password">
-
+    <br>
+    <label for="email">Email: </label>
+    <input id="email" type="email" name="email" value="Email">
+    <br>
     <input type="submit" value="OK">
 </form>
-

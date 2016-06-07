@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from .models import Profile
 
 def index(request):
@@ -25,6 +26,8 @@ def make_login(request):
             message = "Senha ou Usuário incorreto"
 
         return redirect(reverse('au_about:index'))
+    else:
+        return render(request, "au_auth/login.jinja2")
 
 def make_logout(request):
     logout(request)
@@ -50,3 +53,18 @@ def show_profile(request, profile_pk):
     }
 
     return render(request, 'au_auth/profile.jinja2', context)
+
+def singup(request):
+    form = request.POST
+    if form:
+        username = form.get('user')
+        password = form.get('pass')
+        email = form.get('email')
+        user =  User.objects.create_user(username, password, email)
+        user.save()
+
+        profile = Profile.objects.create(user=user, int_number=3)
+        return redirect(reverse('au_about:index'))
+    else:
+        return render(request, 'au_auth/signup.jinja2')
+
