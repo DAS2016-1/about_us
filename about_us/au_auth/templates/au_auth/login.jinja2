@@ -2,6 +2,7 @@
 <br>
 <br>
 <br>
+<h3>{{message}}</h3>
 <form action="{% url "au_auth:make_login" %}" method="POST">
     {% csrf_token %}
     <label for="user">User: </label>

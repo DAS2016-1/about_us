@@ -23,6 +23,6 @@ urlpatterns = [
     url(r'^logout/', views.make_logout, name='make_logout'),
     url(r'^singup/', views.singup, name='singup'),
     url(r'^profiles/', views.show_profiles, name='show_profiles'),
-    url(r'(?P<profile_pk>[0-9]+)/$', views.show_profile, name='show_profile'),
+    url(r'^user/(?P<profile_pk>[0-9]+)/$', views.show_profile, name='show_profile'),
     url(r'^', views.index, name='index'),
 ]
