@@ -39,5 +39,7 @@ def new(request):
             negative_votes=0,
             profile=profile,
         )
+    else:
+        print("TA PASSANDO")
     return redirect(reverse("au_about:index"))
 

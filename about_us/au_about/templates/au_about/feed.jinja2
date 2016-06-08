@@ -5,12 +5,38 @@
 {%endblock%}
 
 {%block content %}
-This is feed
-<br>
-<br>
+    <br>
+    <br>
 
-{%for feed in feeds %}
-    <a href="{%url "au_auth:show_profile" feed.profile.id%}">{{feed.profile.user.username}}:</a> {{feed.comment}} <a href="{% url "au_about:positive" feed.id %}" >posi</a>({{feed.positive_votes}})  <a href="{% url "au_about:negative" feed.id %}" >nega</a>({{feed.negative_votes}})<br>
-{%endfor%}
+    {%for feed in feeds%}
+        <div class="row">
+            <div class="col  s6 offset-s3 ">
+                <div class="card blue lighten-5">
+                    <div class="card-content black-text center">
+                        <p><a href="{%url "au_auth:show_profile" feed.profile.id%}">{{feed.profile.user.username}}: </a>{{feed.comment}} </p>
+                    </div>
+                    <div class="card-action">
+                        <div class="row">
+                            <div class="col s6">
+                                <a class="btn btn-medium waves-effect waves-light red accent-4"href="{% url "au_about:negative" feed.id %}" >
+                                    <div>
+                                        ({{feed.negative_votes}}) Mentira <i class="small material-icons">thumb_down</i>
+                                    </div>
+                                </a>
+
+                            </div>
+                            <div class="col s6 right-align">
+                                <a class="btn btn-medium waves-effect waves-light green accent-4"href="{% url "au_about:positive" feed.id %}">
+                                    <div>
+                                        ({{feed.positive_votes}}) Verdade <i class="medium material-icons">thumb_up</i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%endfor%}
 {%endblock%}
 

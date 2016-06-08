@@ -9,7 +9,7 @@
         <div class="col s6">
             <h2 class="center">Abouts - {{profile.user}}</h2>
             <div class="row">
-                <form  action="{% url "au_about:new"%}" class="col s12">
+                <form  action="{% url "au_about:new"%}" class="col s12" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="profile" id="profile" value="{{profile.id}}">
                     <div class="row">
