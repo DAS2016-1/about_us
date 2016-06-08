@@ -10,24 +10,13 @@
         <div class="col s6 offset-s1">
             <h1>Usuários - About Us</h1>
             <p>Saiba sobre nós também, vizualize os abouts de cada usuário</p>
-            </div>
+        </div>
         <div class="col s4 ">
-            <table class="centered striped bordered">
-                <thead>
-                    <tr>
-                        <th data-field="name">Usuários</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {%for profile in profiles %}
-                        <tr>
-                            <td>
-                                <a href="{%url "au_auth:show_profile" profile.id%}">{{profile.user}}</a><br>
-                            </td>
-                        </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
+            <div class="collection">
+                {%for profile in profiles %}
+                    <a class="collection-item" href="{%url "au_auth:show_profile" profile.id%}">{{profile.user}}</a>
+                {%endfor%}
+            </div>
         </div>
     </div>
 {%endblock%}
