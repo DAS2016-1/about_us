@@ -46,7 +46,7 @@ def show_profiles(request):
 
 def show_profile(request, profile_pk):
     profile = Profile.objects.get(id=profile_pk)
-    abouts = profile.about_set.all()
+    abouts = reversed(profile.about_set.all())
     context = {
         'profile':profile,
         'abouts':abouts,

@@ -4,7 +4,7 @@ from .models import About
 from au_auth.models import Profile
 
 def index(request):
-    feeds = About.objects.all()
+    feeds = reversed(About.objects.all())
     context = {
         'feeds':feeds,
     }
