@@ -57,6 +57,7 @@ def show_profile(request, profile_pk):
 def singup(request):
     form = request.POST
     if form:
+        print("PASSOU")
         username = form.get('user')
         password = form.get('pass')
         email = form.get('email')
