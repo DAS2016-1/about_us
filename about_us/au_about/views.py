@@ -29,8 +29,8 @@ def new(request):
     form = request.POST
     user_id = request.user.id
     if form:
+        print(form.dict())
         comment = form.get('comment')
-        print("Commend: ",comment)
         profile_id = form.get('profile')
         profile = Profile.objects.get(id=profile_id)
         new_about = About.objects.create(
@@ -39,7 +39,5 @@ def new(request):
             negative_votes=0,
             profile=profile,
         )
-    else:
-        print("TA PASSANDO")
     return redirect(reverse("au_about:index"))
 

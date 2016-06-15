@@ -1,0 +1,15 @@
+language: python
+
+python:
+  - 3.4
+  - 3.5
+
+env:
+  - DJANGO=Django==1.9.7
+
+install:
+    - pip3 install django
+
+script:
+    - python3 about_us/manage.py makemigrations
+    - python3 about_us/manage.py migrate
