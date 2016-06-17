@@ -10,6 +10,22 @@ About us is a social network where each user can write anonymously a About for a
 * Materialize v0.97.6
 
 ## Installation Guide
+Using Vagrant<br>
+Install vagrant from apt:<br>
+`sudo apt-get install vagrant`<br><br>
+From others ways: acess https://www.vagrantup.com/downloads.html <br> <br> <br>
+Then, acess the VM: <br>
+`$ vagrant up`<br>
+`$ vagrant ssh`<br>
+`$ cd /vagrant/about_us`<br>
+`$ python3 manage.py makemigrations`<br>
+`$ python3 manage.py migrate`<br>
+`$ python3 manage.py runserver 0.0.0.0:8000`<br>
+
+So, you can acess the network with this url on browser:
+`localhost:8000/`
+
+### Normal Installation
 * Install Python 3.x https://www.python.org/downloads/<br><br>
 
 Install pip3<br>

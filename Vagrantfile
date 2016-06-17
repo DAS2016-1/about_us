@@ -14,7 +14,7 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "debian/jessie64"
   config.vm.provider "virtualbox" do |vm, override|
-    override.vm.network 'forwarded_port', guest: "8000" , host: "4567"
+    override.vm.network 'forwarded_port', guest: "8000" , host: "8000"
   end
 
   config.vm.provision "chef_zero" do |chef|
