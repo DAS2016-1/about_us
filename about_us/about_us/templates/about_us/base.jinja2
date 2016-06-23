@@ -15,9 +15,16 @@
                 About Us
             {% endblock title %}
         </title>
+        <script type="text/javascript">
+            function codeAddress(a) {
+                Materialize.toast(a, 4000)
+            }
+            window.onload = codeAddress;
+        </script>
     </head>
 
-    <body>
+    <body onload="codeAddress('{{message}}')">
+        <div  onload="codeAddress('oi');"></div>
         <header>
             <div class="navbar-fixed">
                 <nav>
