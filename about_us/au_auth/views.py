@@ -39,6 +39,18 @@ def make_logout(request):
     }
     return render(request, "au_auth/login.jinja2")
 
+from functools import wraps
+
+def listen_unread(view_func):
+    def _decorator(request, *args, **kwargs):
+        profile = Profile.objects.get(user=request.user)
+        unread_abouts = profile.unread_abouts
+        request.session['unread_abouts'] = unread_abouts
+        response = view_func(request, *args, **kwargs)
+        return response
+    return wraps(view_func)(_decorator)
+
+@listen_unread
 def show_profiles(request):
     profiles = Profile.objects.all()
     context = {
@@ -66,10 +78,11 @@ def singup(request):
         user.save()
 
         profile = Profile.objects.create(user=user, int_number=3)
-        return render(request, "au_auth/login.jinja2")
+        return_page = "au_auth/login.jinja2"
     else:
-        return render(request, 'au_auth/signup.jinja2')
+        return_page = 'au_auth/signup.jinja2'
 
+    return render(request, return_page)
 
 
 @receiver(post_save, sender=About)
