@@ -1,14 +1,16 @@
-from django.shortcuts import render
-from django.core.urlresolvers import reverse
-from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
 from .models import Profile
+from au_about.models import About
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 def index(request):
     make_login(request)
     return redirect(reverse('au_about:index'))
-
 
 def make_login(request):
     message = ""
@@ -57,7 +59,6 @@ def show_profile(request, profile_pk):
 def singup(request):
     form = request.POST
     if form:
-        print("PASSOU")
         username = form.get('user')
         password = form.get('pass')
         email = form.get('email')
@@ -69,3 +70,8 @@ def singup(request):
     else:
         return render(request, 'au_auth/signup.jinja2')
 
+
+
+@receiver(post_save, sender=About)
+def my_handler(sender, **kwargs):
+    pass

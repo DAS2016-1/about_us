@@ -29,7 +29,6 @@ def new(request):
     form = request.POST
     user_id = request.user.id
     if form:
-        print(form.dict())
         comment = form.get('comment')
         profile_id = form.get('profile')
         profile = Profile.objects.get(id=profile_id)
