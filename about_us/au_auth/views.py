@@ -74,4 +74,6 @@ def singup(request):
 
 @receiver(post_save, sender=About)
 def my_handler(sender, **kwargs):
-    pass
+    profile = kwargs['instance'].profile
+    profile.unread_abouts += 1
+    profile.save()
