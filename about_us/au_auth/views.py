@@ -2,16 +2,15 @@ from .models import Profile
 from about_us.decorators import listen_unread
 from au_about.models import About
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.shortcuts import render
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 
 @login_required
-@listen_unread
 def index(request):
     make_login(request)
     return redirect(reverse('au_about:index'))
@@ -57,6 +56,9 @@ def show_profiles(request):
 @listen_unread
 def show_profile(request, profile_pk):
     profile = Profile.objects.get(id=profile_pk)
+    if profile.user.id == request.user.id:
+        profile.read_abouts()
+        request.session['unread_abouts'] = 0
     abouts = reversed(profile.about_set.all())
     context = {
         'profile':profile,

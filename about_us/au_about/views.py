@@ -1,9 +1,9 @@
+from .models import About
+from about_us.decorators import listen_unread
+from au_auth.models import Profile
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
-from .models import About
-from au_auth.models import Profile
-from about_us.decorators import listen_unread
-from django.contrib.auth.decorators import login_required
 
 @login_required
 @listen_unread

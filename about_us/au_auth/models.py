@@ -9,3 +9,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+    def read_abouts(self):
+        self.unread_abouts = 0
+        self.save()
