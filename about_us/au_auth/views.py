@@ -1,4 +1,5 @@
 from .models import Profile
+from about_us.decorators import listen_unread
 from au_about.models import About
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -7,7 +8,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.shortcuts import render
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
+@login_required
+@listen_unread
 def index(request):
     make_login(request)
     return redirect(reverse('au_about:index'))
@@ -39,17 +43,8 @@ def make_logout(request):
     }
     return render(request, "au_auth/login.jinja2")
 
-from functools import wraps
 
-def listen_unread(view_func):
-    def _decorator(request, *args, **kwargs):
-        profile = Profile.objects.get(user=request.user)
-        unread_abouts = profile.unread_abouts
-        request.session['unread_abouts'] = unread_abouts
-        response = view_func(request, *args, **kwargs)
-        return response
-    return wraps(view_func)(_decorator)
-
+@login_required
 @listen_unread
 def show_profiles(request):
     profiles = Profile.objects.all()
@@ -58,6 +53,8 @@ def show_profiles(request):
     }
     return render(request, 'au_auth/profiles.jinja2', context)
 
+@login_required
+@listen_unread
 def show_profile(request, profile_pk):
     profile = Profile.objects.get(id=profile_pk)
     abouts = reversed(profile.about_set.all())

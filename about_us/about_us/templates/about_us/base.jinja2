@@ -15,12 +15,6 @@
                 About Us
             {% endblock title %}
         </title>
-        <script type="text/javascript">
-            function codeAddress(a) {
-                Materialize.toast(a, 4000)
-            }
-            window.onload = codeAddress;
-        </script>
     </head>
 
     <body onload="codeAddress('{{message}}')">
@@ -29,8 +23,21 @@
             <div class="navbar-fixed">
                 <nav>
                     <div id="nav-bar-custom" class="nav-wrapper teal lighten-2">
-                        <a href="/feed/"class="brand-logo" id="initial-logo">     About Us</a>
+                        <a href="/feed/"class="brand-logo" id="initial-logo">About Us</a>
                         <ul class="right hide-on-med-and-down">
+                            <li>
+                                <a href="{%url "au_auth:show_profile" request.user.id%}">
+                                    <i class="material-icons">
+                                        {%if request.session.unread_abouts == 0 %}
+                                            filter
+                                        {%elif request.session.unread_abouts > 9 %}
+                                            filter_9_plus
+                                        {%else%}
+                                            filter_{{request.session.unread_abouts}}
+                                        {%endif%}
+                                    </i>
+                                </a>
+                            </li>
                             <li><a href="/feed/">Feed Abouts</a></li>
                             <li><a href="{%url "au_auth:show_profile" request.user.id%}">Meu Perfil</a> </li>
                             <li><a href="{% url 'au_auth:show_profiles' %}">Usuários</a></li>

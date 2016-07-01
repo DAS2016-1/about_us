@@ -2,7 +2,11 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from .models import About
 from au_auth.models import Profile
+from about_us.decorators import listen_unread
+from django.contrib.auth.decorators import login_required
 
+@login_required
+@listen_unread
 def index(request):
     feeds = reversed(About.objects.all())
     context = {
@@ -11,6 +15,8 @@ def index(request):
 
     return render(request, 'au_about/feed.jinja2', context)
 
+@login_required
+@listen_unread
 def positive(request, item_id):
     about = About.objects.get(id=item_id)
     about.positive_votes += 1
@@ -18,6 +24,8 @@ def positive(request, item_id):
 
     return redirect(reverse("au_about:index"))
 
+@login_required
+@listen_unread
 def negative(request, item_id):
     about = About.objects.get(id=item_id)
     about.negative_votes += 1
@@ -25,6 +33,8 @@ def negative(request, item_id):
 
     return redirect(reverse("au_about:index"))
 
+@login_required
+@listen_unread
 def new(request):
     form = request.POST
     user_id = request.user.id
