@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'about_us',
     'au_auth',
     'au_about',
+    'active_sessions',
 ]
 
 MIDDLEWARE_CLASSES = [

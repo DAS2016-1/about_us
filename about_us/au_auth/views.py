@@ -9,6 +9,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.shortcuts import render
 from django.shortcuts import render, redirect
+import active_sessions
 
 @login_required
 def index(request):
@@ -31,7 +32,6 @@ def make_login(request):
                 message = "Usuário não está ativo"
         else:
             message = "Senha ou Usuário incorreto"
-
     context = {'message':message}
     return render(request, "au_auth/login.jinja2", context)
 
@@ -55,6 +55,7 @@ def show_profiles(request):
 @login_required
 @listen_unread
 def show_profile(request, profile_pk):
+    active_sessions
     profile = Profile.objects.get(id=profile_pk)
     if profile.user.id == request.user.id:
         profile.read_abouts()
