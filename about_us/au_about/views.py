@@ -3,7 +3,9 @@ from about_us.decorators import listen_unread
 from au_auth.models import Profile
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
+import json
 
 @login_required
 @listen_unread
