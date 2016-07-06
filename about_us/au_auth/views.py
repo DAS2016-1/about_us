@@ -83,6 +83,15 @@ def singup(request):
 
     return render(request, return_page)
 
+def get_notification(request):
+    if request.method == "POST":
+        profile = Profile.objects.get(user=request.user)
+        unread_abouts = profile.unread_abouts
+        context = {"unread_abouts":unread_abouts}
+        return HttpResponse(
+            json.dumps(context),
+            content_type="application/json"
+        )
 
 @receiver(post_save, sender=About)
 def my_handler(sender, **kwargs):
