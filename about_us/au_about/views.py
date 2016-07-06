@@ -40,9 +40,11 @@ def negative(request, item_id):
 def new(request):
     form = request.POST
     user_id = request.user.id
+    response_data = {}
     if form:
         comment = form.get('comment')
         profile_id = form.get('profile')
+        print("Profile: %s, comment: %s" % (profile_id, comment))
         profile = Profile.objects.get(id=profile_id)
         new_about = About.objects.create(
             comment=comment,
@@ -50,5 +52,16 @@ def new(request):
             negative_votes=0,
             profile=profile,
         )
-    return redirect(reverse("au_about:index"))
+        response_data['result'] = 'Create post successful!'
+        response_data['postpk'] = new_about.pk
+        response_data['comment'] = new_about.comment
+        response_data['author'] = new_about.profile.user.username
+    else:
+        response_data['result'] = 'Create post successful!'
+
+    return HttpResponse(
+        json.dumps(response_data),
+        content_type="application/json"
+    )
+    # return redirect(reverse("au_about:index"))
 
