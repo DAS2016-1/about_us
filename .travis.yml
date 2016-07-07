@@ -8,6 +8,7 @@ env:
 
 install:
     - pip3 install django
+    - pip3 install active-sessions
 
 script:
     - python3 about_us/manage.py makemigrations

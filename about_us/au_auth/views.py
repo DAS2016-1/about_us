@@ -46,7 +46,6 @@ def make_logout(request):
 
 
 @login_required
-@listen_unread
 def show_profiles(request):
     profiles = Profile.objects.all()
     context = {
