@@ -62,13 +62,11 @@ $(function() {
     // Submit post on submit
     $('#post-form').on('submit', function(event){
         event.preventDefault();
-        console.log("form submitted!")  // sanity check
             create_post();
     });
 
     // AJAX for posting
     function create_post() {
-        console.log("create post is working!") // sanity check
             $.ajax({
                 url : "/feed/new/", // the endpoint
                 type : "POST", // http method
@@ -96,6 +94,23 @@ $(function() {
             });
     };
 
+    function alert_notification(unread_abouts) {
+        unread_abouts_int = parseInt(unread_abouts,10);
+        icon = "";
+
+        if (unread_abouts_int == 0){
+            icon = "filter";
+        } else if (unread_abouts_int < 10) {
+            icon = "filter_" + unread_abouts_int;
+        } else {
+            icon = "filter_9_plus";
+        }
+
+        icon_notification = $("#notification")[0];
+        icon_notification.textContent = icon
+
+
+    }
     // AJAX for posting
     function notification() {
         $.ajax({
@@ -104,7 +119,7 @@ $(function() {
 
             // handle a successful response
             success : function(json) {
-                console.log(json.unread_abouts)
+                alert_notification(json.unread_abouts)
             },
 
             // handle a non-successful response
@@ -115,7 +130,7 @@ $(function() {
             },
 
             complete: function () {
-                window.setTimeout(notification, 10000);
+                window.setTimeout(notification, 5000);
             }
         });
     };

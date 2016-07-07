@@ -27,7 +27,7 @@
                         <ul class="right hide-on-med-and-down">
                             <li>
                                 <a href="{%url "au_auth:show_profile" request.user.id%}">
-                                    <i class="material-icons">
+                                    <i id="notification" class="material-icons">
                                         {%if request.session.unread_abouts == 0 %}
                                             filter
                                         {%elif request.session.unread_abouts > 9 %}
