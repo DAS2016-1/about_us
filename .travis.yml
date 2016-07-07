@@ -7,8 +7,7 @@ env:
   - DJANGO=Django==1.9.7
 
 install:
-    - pip3 install django
-    - pip3 install active-sessions
+    - pip3 install -r requirements.txt
 
 script:
     - python3 about_us/manage.py makemigrations
