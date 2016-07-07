@@ -1,5 +1,6 @@
 from .models import Profile
 from about_us.decorators import listen_unread
+from active_sessions.active_sessions import *
 from au_about.models import About
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -7,9 +8,10 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render, redirect
-from active_sessions.active_sessions import *
+import json
 
 @login_required
 def index(request):
@@ -83,8 +85,8 @@ def singup(request):
 
     return render(request, return_page)
 
-def get_notification(request):
-    if request.method == "POST":
+def notification(request):
+    if request.method == "GET":
         profile = Profile.objects.get(user=request.user)
         unread_abouts = profile.unread_abouts
         context = {"unread_abouts":unread_abouts}

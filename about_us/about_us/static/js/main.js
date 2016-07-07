@@ -98,31 +98,26 @@ $(function() {
 
     // AJAX for posting
     function notification() {
-        console.log("create post is working!") // sanity check
-            $.ajax({
-                url : "/feed/new/", // the endpoint
-                type : "POST", // http method
-                data : {
-                    comment: $('#comment').val(),
-                    profile: $('#profile').val(),
-                }, // data sent with the post request
+        $.ajax({
+            url : "/auth/notification/", // the endpoint
+            type : "GET", // http method
 
-                // handle a successful response
-                success : function(json) {
-                    $('#comment').val(''); // remove the value from the input
-                    about = $("#about")
-                    about_clone = about.clone()
-                    change_about(json, about_clone)
-                    block = $("#talk")
-                    block.prepend(about_clone.clone())
-                },
+            // handle a successful response
+            success : function(json) {
+                console.log(json.unread_abouts)
+            },
 
-                // handle a non-successful response
-                error : function(xhr,errmsg,err) {
-                    $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-                            " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                    console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-                }
-            });
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                        " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            },
+
+            complete: function () {
+                window.setTimeout(notification, 10000);
+            }
+        });
     };
+    notification();
 });
