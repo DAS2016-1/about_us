@@ -82,7 +82,9 @@ $(function() {
                     about_clone = about.clone()
                     change_about(json, about_clone)
                     block = $("#talk")
-                    block.prepend(about_clone.clone())
+                    block.prepend(about_clone.clone());
+                    var $toastContent = $('<span>About criado</span>');
+                    Materialize.toast($toastContent, 3000);
                 },
 
                 // handle a non-successful response
